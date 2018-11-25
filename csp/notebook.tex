@@ -1,0 +1,1603 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CSP (Constraint Satisfaction Problem)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \hypertarget{csp-algorithms-and-applications}{%
+\section{CSP Algorithms and
+Applications}\label{csp-algorithms-and-applications}}
+
+    \textbf{Sources:}
+
+\begin{itemize}
+\tightlist
+\item
+  https://www.cs.ubc.ca/\textasciitilde{}mack/CS322/lectures/3-CSP2.pdf
+\end{itemize}
+
+\textbf{Definition:} A \emph{constraint satisfaction problem (CSP)}
+consists of:
+
+\begin{itemize}
+\tightlist
+\item
+  a set of variables \(\mathscr V\).
+\item
+  a domain \(\textrm{dom}(V)\) for each variable \(V \in \mathscr V\).
+\item
+  a set of constraints \(C\).
+\end{itemize}
+
+An example of a CSP model is:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathscr V = \{V_1, V_2\}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\textrm{dom}(V_1) = \{1,2,3\}\)
+  \item
+    \(\textrm{dom}(V_2) = \{1,2\}\)
+  \end{itemize}
+\item
+  \(C = \{C_1,C_2,C_3\}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(C_1: V_2 \neq 2\)
+  \item
+    \(C_2: V_1 + V_2 < 5\)
+  \item
+    \(C_3: V_1 > V_2\)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Definition}: A \emph{model} of a CSP is an assignment of values
+to all of its variables that \emph{satisfies} all of its constraints.
+
+\textbf{Generate and Test (GT) algorithm}: Systematically check all
+possible worlds. All possible worlds is the cross product of all the
+domains:
+
+\[ \textrm{dom}(V_1) \times \textrm{dom}(V_2) \times \ldots \times \textrm{dom}(V_n) \]
+
+Generate and test:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate possible worlds one at a time.
+\item
+  Test constraints for each one.
+\end{enumerate}
+
+For \(k\) variables, each with domain size \(d\), and there are \(c\)
+constraints, the complexity is \(O(ck^d)\):
+
+\begin{itemize}
+\tightlist
+\item
+  There are \(d^k\) possible worlds.
+\item
+  For each one need to check c constraints.
+\end{itemize}
+
+\textbf{Graph Searching (GS) algorithm (backtrack)}: In this algorithm
+we have a set of \emph{states}, which are partial assignments of values
+to variables. At the start state there are no assignments. A successor
+function is defined with states with the next variable assigned:
+
+\begin{itemize}
+\tightlist
+\item
+  E.g., follow a total order of the variables \(\{V_1,\ldots,V_n\}\).
+\item
+  A state assigns values to the first \(k\) variables
+  \(\{V_1,\ldots,V_n\}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Neighbors of node \(\{V_1 = v_1, \ldots, V_k=v_k, V_{k+1}=x\}\) for
+    each \(x \in \textrm{dom}(V_{k+1})\).
+  \end{itemize}
+\end{itemize}
+
+Goal state: complete assignments of values to variables that satisfy all
+constraints. Solution is the assignment (path does not matter).
+
+The search space can be explored via DFS but evaluate each constraint as
+soon as all its variables are bound (all variables in a constrant, are
+in scope). Any partial assignment that doesn't satisfy the constraint
+can be pruned.
+
+A heuristic can be added to this algorithm. An order can be applied to
+the checking of the variables. It should start to check the variable
+that is used in the most constraints first (fail early).
+
+    \hypertarget{basic-algorithm-implementation-hssolver}{%
+\section{\texorpdfstring{Basic algorithm implementation
+(\texttt{HSSolver})}{Basic algorithm implementation (HSSolver)}}\label{basic-algorithm-implementation-hssolver}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{copy}
+         
+         \PY{k}{def} \PY{n+nf}{head}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{xs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xs}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{k+kc}{None}
+         \PY{k}{def} \PY{n+nf}{replace\PYZus{}all}\PY{p}{(}\PY{n}{text}\PY{p}{,} \PY{n}{dic}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{k}\PY{p}{,} \PY{n}{v} \PY{o+ow}{in} \PY{n}{dic}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+         \PY{k}{def} \PY{n+nf}{subset}\PY{p}{(}\PY{n}{A}\PY{p}{,}\PY{n}{B}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{a} \PY{o+ow}{in} \PY{n}{B} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n}{A}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{class} \PY{n+nc}{Variable}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{n}{D}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{name}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{domain} \PY{o}{=} \PY{n}{D}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{D}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}eq\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{v}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{v}\PY{o}{.}\PY{n}{name} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}repr\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{value}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{domain}\PY{p}{)}
+                 
+         \PY{k}{class} \PY{n+nc}{Constraint}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{expr}\PY{p}{,} \PY{o}{*}\PY{n}{variables}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables} \PY{o}{=} \PY{n}{variables}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression} \PY{o}{=} \PY{n}{expr}
+             \PY{k}{def} \PY{n+nf}{evalstr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} 
+             \PY{k}{def} \PY{n+nf}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:} 
+                 \PY{k}{return} \PY{n+nb}{eval}\PY{p}{(}\PY{n}{replace\PYZus{}all}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{v}\PY{o}{.}\PY{n}{name}\PY{p}{:}\PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}repr\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression}
+             
+         \PY{k}{class} \PY{n+nc}{CSP}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{variables}\PY{p}{,} \PY{n}{constraints}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables} \PY{o}{=} \PY{n}{variables}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints} \PY{o}{=} \PY{n}{constraints}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first} \PY{o}{=} \PY{k+kc}{False}
+                 
+             \PY{k}{def} \PY{n+nf}{solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gt\PYZus{}solve}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} solving with a Generate and Test (GT) algorithm}
+             \PY{c+c1}{\PYZsh{}}
+             \PY{c+c1}{\PYZsh{} example:}
+             \PY{c+c1}{\PYZsh{} for a \PYZbs{}in dom A}
+             \PY{c+c1}{\PYZsh{}   for b \PYZbs{}in dom B}
+             \PY{c+c1}{\PYZsh{}      for c \PYZbs{}in dom C}
+             \PY{c+c1}{\PYZsh{}        if \PYZob{}A=a, B=b, C=c\PYZcb{} return solution}
+             \PY{k}{def} \PY{n+nf}{gt\PYZus{}solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(Call) S contains }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, V contains }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{S}\PY{p}{,}\PY{n}{V}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{V}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     
+                     \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{} eval all}
+                     \PY{c+c1}{\PYZsh{}return all([c.eval(S) for c in self.constraints])}
+                     
+                     \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{} verbose output}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  (Base) Checking constraints...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{:}
+                         \PY{n}{r} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{r}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  (Satisfied) }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+                         \PY{k}{else}\PY{p}{:} 
+                             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  (Failed) }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+                             \PY{k}{return} \PY{k+kc}{False}
+                     \PY{k}{return} \PY{k+kc}{True}
+                     
+                 \PY{n}{v} \PY{o}{=} \PY{n}{V}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{S}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{v}\PY{o}{.}\PY{n}{domain}\PY{p}{:}
+                     \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first}\PY{p}{:} \PY{k}{return}
+                     \PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{d}
+                     \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gt\PYZus{}solve}\PY{p}{(}\PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{,} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o}{=} \PY{n}{S}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  (Solution) }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{S}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                         \PY{k}{return}
+                 \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \hypertarget{example-1}{%
+\subsection{Example 1}\label{example-1}}
+
+    Testing the \texttt{gt\_solve} method with the example model shown at
+the beginning of this document:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}476}]:} \PY{n}{v1} \PY{o}{=} \PY{n}{Variable}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+          \PY{n}{v2} \PY{o}{=} \PY{n}{Variable}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+          \PY{n}{V} \PY{o}{=} \PY{p}{[}\PY{n}{v1}\PY{p}{,}\PY{n}{v2}\PY{p}{]}
+          \PY{n}{c1} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1 != v2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{,} \PY{n}{v2}\PY{p}{)}
+          \PY{n}{c2} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1 + v2 \PYZlt{}= 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{,} \PY{n}{v2}\PY{p}{)}
+          \PY{n}{c3} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1 \PYZgt{} v2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{,} \PY{n}{v2}\PY{p}{)}
+          \PY{n}{c4} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1 \PYZgt{}= 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{)}
+          \PY{n}{C} \PY{o}{=} \PY{p}{[}\PY{n}{c1}\PY{p}{,}\PY{n}{c2}\PY{p}{,}\PY{n}{c3}\PY{p}{,}\PY{n}{c4}\PY{p}{]}   
+          \PY{n}{csp} \PY{o}{=} \PY{n}{CSP}\PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{n}{C}\PY{p}{)}
+          \PY{n}{csp}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first} \PY{o}{=} \PY{k+kc}{True}
+          \PY{n}{csp}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(Call) S contains [], V contains [v1=1, v2=1]
+(Call) S contains [v2=1], V contains [v1=1]
+(Call) S contains [v2=1, v1=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) v1 != v2
+(Call) S contains [v2=1, v1=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) v1 != v2
+  (Satisfied) v1 + v2 <= 5
+  (Satisfied) v1 > v2
+  (Failed) v1 >= 3
+(Call) S contains [v2=1, v1=3], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) v1 != v2
+  (Satisfied) v1 + v2 <= 5
+  (Satisfied) v1 > v2
+  (Satisfied) v1 >= 3
+  (Solution) [v1=3, v2=1]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}476}]:} [v1=3, v2=1]
+\end{Verbatim}
+            
+    \hypertarget{example-2}{%
+\subsection{Example 2}\label{example-2}}
+
+Solving the Australian map coloring problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}471}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          colors = \PYZob{}\PYZsq{}red\PYZsq{}: 0, \PYZsq{}blue\PYZsq{}: 1, \PYZsq{}green\PYZsq{}: 2\PYZcb{}
+          icolors = \PYZob{}v:k for k,v in colors.items()\PYZcb{}
+          V = [Variable(x, list(colors.values())) for x in \PYZsq{}SA,WA,NT,Q,NSW,V\PYZsq{}.split(\PYZsq{},\PYZsq{})]
+          V
+          c1 = Constraint(\PYZsq{}SA!=WA\PYZsq{})
+          c2 = Constraint(\PYZsq{}SA!=NT\PYZsq{})
+          c3 = Constraint(\PYZsq{}SA!=Q\PYZsq{})
+          c4 = Constraint(\PYZsq{}SA!=NSW\PYZsq{})
+          c5 = Constraint(\PYZsq{}SA!=V\PYZsq{})
+          c6 = Constraint(\PYZsq{}WA!=NT\PYZsq{})
+          c7 = Constraint(\PYZsq{}NT!=Q\PYZsq{})
+          c8 = Constraint(\PYZsq{}Q!=NSW\PYZsq{})
+          c9 = Constraint(\PYZsq{}NSW!=V\PYZsq{})
+          C = [c1,c2,c3,c4,c5,c6,c7,c8,c9]
+          csp = CSP(V,C)
+          csp.stop\PYZus{}on\PYZus{}first = True
+          csp.solve()
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(Call) S contains [], V contains [SA=0, WA=0, NT=0, Q=0, NSW=0, V=0]
+(Call) S contains [V=0], V contains [SA=0, WA=0, NT=0, Q=0, NSW=0]
+(Call) S contains [V=0, NSW=0], V contains [SA=0, WA=0, NT=0, Q=0]
+(Call) S contains [V=0, NSW=0, Q=0], V contains [SA=0, WA=0, NT=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=0], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Failed) NT!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Failed) NT!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=0, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=1], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Satisfied) NT!=Q
+  (Failed) Q!=NSW
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=1, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=2], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Satisfied) NT!=Q
+  (Failed) Q!=NSW
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=0, NT=2, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1], V contains [SA=0, WA=0, NT=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=0], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Satisfied) NT!=Q
+  (Satisfied) Q!=NSW
+  (Failed) NSW!=V
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=1, NT=0, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=1], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Failed) NT!=Q
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=1, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=2], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=1, NT=2, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2], V contains [SA=0, WA=0, NT=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=0], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Satisfied) NT!=Q
+  (Satisfied) Q!=NSW
+  (Failed) NSW!=V
+(Call) S contains [V=0, NSW=0, Q=2, NT=0, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=1], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Failed) SA!=Q
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=1, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=2], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Failed) NT!=Q
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=0, Q=2, NT=2, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=1], V contains [SA=0, WA=0, NT=0, Q=0]
+(Call) S contains [V=0, NSW=1, Q=0], V contains [SA=0, WA=0, NT=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=0], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Failed) WA!=NT
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=1], V contains [SA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=1, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=1, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=1, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Failed) NT!=Q
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=2], V contains [SA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=2, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=2, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Failed) SA!=NSW
+(Call) S contains [V=0, NSW=1, Q=0, NT=0, WA=2, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=1, Q=0, NT=1], V contains [SA=0, WA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=1, WA=0], V contains [SA=0]
+(Call) S contains [V=0, NSW=1, Q=0, NT=1, WA=0, SA=0], V contains []
+  (Base) Checking constraints{\ldots}
+  (Failed) SA!=WA
+(Call) S contains [V=0, NSW=1, Q=0, NT=1, WA=0, SA=1], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Failed) SA!=NT
+(Call) S contains [V=0, NSW=1, Q=0, NT=1, WA=0, SA=2], V contains []
+  (Base) Checking constraints{\ldots}
+  (Satisfied) SA!=WA
+  (Satisfied) SA!=NT
+  (Satisfied) SA!=Q
+  (Satisfied) SA!=NSW
+  (Satisfied) SA!=V
+  (Satisfied) WA!=NT
+  (Satisfied) NT!=Q
+  (Satisfied) Q!=NSW
+  (Satisfied) NSW!=V
+  (Solution) [SA=2, WA=0, NT=1, Q=0, NSW=1, V=0]
+Wall time: 32 ms
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}468}]:} \PY{p}{[}\PY{p}{\PYZob{}}\PY{n}{v}\PY{o}{.}\PY{n}{name}\PY{p}{:}\PY{n}{icolors}\PY{p}{[}\PY{n}{v}\PY{o}{.}\PY{n}{value}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{csp}\PY{o}{.}\PY{n}{solution}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}468}]:} [\{'V': 'red'\},
+           \{'NSW': 'blue'\},
+           \{'Q': 'red'\},
+           \{'NT': 'blue'\},
+           \{'WA': 'red'\},
+           \{'SA': 'green'\}]
+\end{Verbatim}
+            
+    \hypertarget{implementations-of-all-algorithms}{%
+\section{Implementations of all
+algorithms}\label{implementations-of-all-algorithms}}
+
+This section covers all the implementations of the algorithms. In later
+sections, each algorithm is explained in more detail. The following
+algorithms are implemented:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{HSSolver}: brute-force tree-based search. (brute-force)
+\item
+  \texttt{GSSolver}: pruned tree-based search. (evaluate constraints
+  when variables are in scope)
+\item
+  \texttt{HGSSolver}: heuristical pruned tree-based search. (solve the
+  variables in order of max. number of constraints)
+\item
+  \texttt{IGSSolver}: inferenced pruned tree-based search. (remove any
+  assigned values from the domain of any shared \(\mathrm{AllDiff}\)s)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}279}]:} \PY{k+kn}{import} \PY{n+nn}{copy}
+          
+          \PY{k}{class} \PY{n+nc}{Variable}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{n}{D}\PY{p}{)}\PY{p}{:} 
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{name}\PY{p}{;} 
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{domain} \PY{o}{=} \PY{n}{D}\PY{p}{;} 
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{D}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}hash\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{ord}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}eq\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{v}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{v}\PY{o}{.}\PY{n}{name} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}repr\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{value}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{domain}\PY{p}{)}
+                  
+          \PY{k}{class} \PY{n+nc}{Constraint}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{expr}\PY{p}{,} \PY{n}{scope}\PY{p}{)}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression} \PY{o}{=} \PY{n}{expr}\PY{p}{;} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{scope} \PY{o}{=} \PY{n}{scope}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}repr\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression}
+              \PY{k}{def} \PY{n+nf}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{replace\PYZus{}all}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expression}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{v}\PY{o}{.}\PY{n}{name}\PY{p}{:}\PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{replace\PYZus{}all}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{text}\PY{p}{,} \PY{n}{dic}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{k}\PY{p}{,} \PY{n}{v} \PY{o+ow}{in} \PY{n}{dic}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{text} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{text}
+              
+          \PY{k}{class} \PY{n+nc}{AllDiff}\PY{p}{(}\PY{n}{Constraint}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{scope}\PY{p}{)}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{scope} \PY{o}{=} \PY{n}{scope}
+              \PY{k}{def} \PY{n+nf}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{replace\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alldiff([}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{])}\PY{l+s+s1}{\PYZsq{}}
+                                                              \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{v}\PY{o}{.}\PY{n}{name} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{v}\PY{o}{.}\PY{n}{name}\PY{p}{:}\PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Scopeless brute\PYZhy{}force search algorithm.}
+          \PY{k}{class} \PY{n+nc}{GTSolver}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{variables}\PY{p}{,} \PY{n}{constraints}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables} \PY{o}{=} \PY{n}{variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints} \PY{o}{=} \PY{n}{constraints}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first} \PY{o}{=} \PY{k+kc}{False}
+                  
+              \PY{k}{def} \PY{n+nf}{solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gt\PYZus{}solve}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+              
+              \PY{k}{def} \PY{n+nf}{gt\PYZus{}solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{V}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+                      \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{]}\PY{p}{)}           
+                  \PY{n}{v} \PY{o}{=} \PY{n}{V}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{S}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{v}\PY{o}{.}\PY{n}{domain}\PY{p}{:}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first}\PY{p}{:} \PY{k}{return}
+                      \PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{d}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gt\PYZus{}solve}\PY{p}{(}\PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{,} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+                  \PY{k}{return} \PY{k+kc}{False}
+              
+          \PY{c+c1}{\PYZsh{} Scope searching algorithm with solution pruning. It starts}
+          \PY{c+c1}{\PYZsh{} to check if a solution is valid as soon as the scope of a constraint}
+          \PY{c+c1}{\PYZsh{} is a subset of the solution set.}
+          \PY{k}{class} \PY{n+nc}{GSSolver}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              
+              \PY{k}{def} \PY{n+nf}{all\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{s} \PY{o+ow}{in} \PY{n}{C} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S}\PY{p}{]}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{any\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{any}\PY{p}{(}\PY{p}{[}\PY{n}{s} \PY{o+ow}{in} \PY{n}{C} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S}\PY{p}{]}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{k\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S} \PY{k}{if} \PY{n}{s} \PY{o+ow}{in} \PY{n}{C}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{k}
+              
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{variables}\PY{p}{,} \PY{n}{constraints}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables} \PY{o}{=} \PY{n}{variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints} \PY{o}{=} \PY{n}{constraints}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first} \PY{o}{=} \PY{k+kc}{False}
+                  
+              \PY{k}{def} \PY{n+nf}{solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gs\PYZus{}solve}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+              
+              \PY{k}{def} \PY{n+nf}{gs\PYZus{}solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{V}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+                      \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{]}\PY{p}{)} 
+                  \PY{k}{elif} \PY{n+nb}{len}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{AllDiff}\PY{p}{)} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}scope}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{n}{c}\PY{o}{.}\PY{n}{scope}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                              \PY{k}{if} \PY{o+ow}{not} \PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return}
+                          \PY{k}{else}\PY{p}{:}
+                              \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{all\PYZus{}scope}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{n}{c}\PY{o}{.}\PY{n}{scope}\PY{p}{)} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+                                  \PY{k}{return}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{V}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{S}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{v}\PY{o}{.}\PY{n}{domain}\PY{p}{:}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first}\PY{p}{:} \PY{k}{return}
+                      \PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{d}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gs\PYZus{}solve}\PY{p}{(}\PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{,} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+                  \PY{k}{return} \PY{k+kc}{False}
+              
+          \PY{c+c1}{\PYZsh{} Heuristical scope searching algorithm with solution pruning. It starts}
+          \PY{c+c1}{\PYZsh{} to check if a solution is valid as soon as the scope of a constraint}
+          \PY{c+c1}{\PYZsh{} is a subset of the solution set. Before solving, by inference, it will sort}
+          \PY{c+c1}{\PYZsh{} the variables based on in how many constraints they are. With this heuristic}
+          \PY{c+c1}{\PYZsh{} it will fail as early as possible (which should improve the speed).}
+          \PY{k}{class} \PY{n+nc}{HGSSolver}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{} C : scope of the constraint}
+              \PY{c+c1}{\PYZsh{} S : solution set}
+              \PY{k}{def} \PY{n+nf}{all\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{s} \PY{o+ow}{in} \PY{n}{C} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} c is a subset of S}
+              \PY{k}{def} \PY{n+nf}{any\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{any}\PY{p}{(}\PY{p}{[}\PY{n}{s} \PY{o+ow}{in} \PY{n}{C} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} any c is in S}
+              \PY{k}{def} \PY{n+nf}{k\PYZus{}scope}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{S} \PY{k}{if} \PY{n}{s} \PY{o+ow}{in} \PY{n}{C}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{k} \PY{c+c1}{\PYZsh{} c is in S atleast k times}
+              \PY{k}{def} \PY{n+nf}{count\PYZus{}constraints}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{V}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{p}{\PYZob{}}\PY{n}{v}\PY{p}{:}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{C} \PY{k}{if} \PY{n}{v} \PY{o+ow}{in} \PY{n}{c}\PY{o}{.}\PY{n}{scope}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{\PYZcb{}}
+              \PY{k}{def} \PY{n+nf}{order\PYZus{}variables\PYZus{}by\PYZus{}n\PYZus{}constraints}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{V}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{count\PYZus{}constraints}\PY{p}{(}\PY{n}{V}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{operator}\PY{o}{.}\PY{n}{itemgetter}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{pre\PYZus{}sort}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{V}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{p}{[}\PY{n}{k} \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{order\PYZus{}variables\PYZus{}by\PYZus{}n\PYZus{}constraints}\PY{p}{(}\PY{n}{V}\PY{p}{,}\PY{n}{C}\PY{p}{)}\PY{p}{]}
+              
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{variables}\PY{p}{,} \PY{n}{constraints}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables} \PY{o}{=} \PY{n}{variables}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints} \PY{o}{=} \PY{n}{constraints}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first} \PY{o}{=} \PY{k+kc}{False}
+                  
+              \PY{k}{def} \PY{n+nf}{solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hgs\PYZus{}solve}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pre\PYZus{}sort}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{variables}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+              
+              \PY{k}{def} \PY{n+nf}{hgs\PYZus{}solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{S}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{V}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+                      \PY{k}{return} \PY{n+nb}{all}\PY{p}{(}\PY{p}{[}\PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{]}\PY{p}{)} 
+                  \PY{k}{elif} \PY{n+nb}{len}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{constraints}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{AllDiff}\PY{p}{)} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}scope}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{n}{c}\PY{o}{.}\PY{n}{scope}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{if} \PY{o+ow}{not} \PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return}
+                          \PY{k}{else}\PY{p}{:}
+                              \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{all\PYZus{}scope}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{n}{c}\PY{o}{.}\PY{n}{scope}\PY{p}{)} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{V}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{S}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{v}\PY{o}{.}\PY{n}{domain}\PY{p}{:}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution} \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stop\PYZus{}on\PYZus{}first}\PY{p}{:} \PY{k}{return}
+                      \PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{d}
+                      \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hgs\PYZus{}solve}\PY{p}{(}\PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{,} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{solution}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+                  \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    Applying this to the map coloring problem:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{k}{def} \PY{n+nf}{color\PYZus{}problem}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{colors} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{\PYZcb{}}
+              \PY{n}{V} \PY{o}{=} \PY{p}{[}\PY{n}{Variable}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{colors}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA,WA,NT,Q,NSW,V}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+              \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n}{head}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{filter}\PY{p}{(}\PY{k}{lambda} \PY{n}{v}\PY{p}{:} \PY{n}{v}\PY{o}{.}\PY{n}{name} \PY{o}{==} \PY{n}{name}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{c1} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA!=WA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c2} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA!=NT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c3} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA!=Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c4} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA!=NSW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NSW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c5} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA!=V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c6} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WA!=NT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c7} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NT!=Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c8} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q!=NSW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NSW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{c9} \PY{o}{=} \PY{n}{Constraint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NSW!=V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NSW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{C} \PY{o}{=} \PY{p}{[}\PY{n}{c1}\PY{p}{,}\PY{n}{c2}\PY{p}{,}\PY{n}{c3}\PY{p}{,}\PY{n}{c4}\PY{p}{,}\PY{n}{c5}\PY{p}{,}\PY{n}{c6}\PY{p}{,}\PY{n}{c7}\PY{p}{,}\PY{n}{c8}\PY{p}{,}\PY{n}{c9}\PY{p}{]}
+              \PY{k}{return} \PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{n}{C}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}267}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V, C = color\PYZus{}problem()
+          csp = GTSolver(V,C)
+          csp.solve()
+          print(\PYZsq{}There are \PYZob{}\PYZcb{} solutions:\PYZsq{}.format(len(csp.solution)))
+          lkup = \PYZob{}v:k for k,v in colors.items()\PYZcb{}
+          print([[\PYZob{}v.name:lkup[v.value]\PYZcb{} for v in s] for s in csp.solution])
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 6 solutions:
+[[\{'V': 'red'\}, \{'NSW': 'blue'\}, \{'Q': 'red'\}, \{'NT': 'blue'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'red'\}, \{'NSW': 'green'\}, \{'Q': 'red'\}, \{'NT': 'green'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'red'\}, \{'Q': 'blue'\}, \{'NT': 'red'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'green'\}, \{'Q': 'blue'\}, \{'NT': 'green'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'red'\}, \{'Q': 'green'\}, \{'NT': 'red'\}, \{'WA': 'green'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'blue'\}, \{'Q': 'green'\}, \{'NT': 'blue'\}, \{'WA': 'green'\}, \{'SA': 'green'\}]]
+Wall time: 177 ms
+
+    \end{Verbatim}
+
+    The map coloring problem has \(O(ck^d)=O(9\cdot 7^3)=3,087\) possible
+worlds.
+
+    \hypertarget{alldiff-and-pruning-gssolver}{%
+\section{\texorpdfstring{AllDiff and pruning
+(\texttt{GSSolver})}{AllDiff and pruning (GSSolver)}}\label{alldiff-and-pruning-gssolver}}
+
+    The \(\textrm{AllDiff}\) function returns true if all the elements in
+\(S\) are different, and otherwise false. This is a useful function to
+set up constraints, i.e.: a Sudoku solver.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{k}{def} \PY{n+nf}{alldiff}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n}{S}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Solving with the GT algorithm}: If we create a simple problem
+with variables \(\{V_1,\ldots,V_9\}\), with each a domain of
+\(\textrm{dom}(V_k)=\{0,1,2,\ldots,9\}\). The constraint is that all
+variables have different values. The GT-algorithm runs with \(O(ck^d)\)
+complexity, which gives us \(O(1\cdot 9^9)=387,420,489\) possible
+worlds. By the way the algorithm works, the first solution will be
+\(\{V_1=9, V_2=8,\ldots,V_8=2,V_9=1\}\), which is found halfway through
+all the solutions. This means that a model is approximately found at the
+\(193,710,224\)th test. Needlessly to say, this algorithm will take a
+very long time to find a feasible solution to the model.
+
+\textbf{Extending to the GS algorithm:} To solve this particular
+problem, the GT algorithm has been modified to do the GS algorithm. To
+properly perform this, a scope has been added to the constraints. This
+scope is used to start early evaluation of possible solutions. When the
+variables of the scope of a constraint is a subset of the solution set,
+we can see if the constraint is satisfied. This way, when there is an
+invalid solution, the sub-tree will be pruned as soon as any constraint
+fails to be satisfied.
+
+The constraints will need to know which variables are included, which is
+the \emph{scope} of the constraint. If all the variables that are in the
+solution cover the scope of a constraint, it will be evaluated.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{k}{class} \PY{n+nc}{AllDiff}\PY{p}{(}\PY{n}{Constraint}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{scope}\PY{p}{)}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{scope} \PY{o}{=} \PY{n}{scope}
+              \PY{k}{def} \PY{n+nf}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{V}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{n+nb}{eval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{replace\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alldiff([}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{])}\PY{l+s+s1}{\PYZsq{}}
+                                                              \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{v}\PY{o}{.}\PY{n}{name} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{v}\PY{o}{.}\PY{n}{name}\PY{p}{:}\PY{n}{v}\PY{o}{.}\PY{n}{value} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{V}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The \(\textrm{AllDiff}\) constraint does not require to have all the
+variables in scope. It should check satisfaction as soon as there are
+two or more variables in the scope that can be tested. In essence, the
+\(\textrm{AllDiff}\) constraint will create a cross-product between all
+the variables to create a constraint for inequality between any 2-pairs
+of variables. Therefore it will create \(k^2\) constraints, and we can
+already start checking if we have two variables in scope.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V = [Variable(\PYZsq{}x\PYZob{}\PYZcb{}\PYZsq{}.format(x), list(range(10))) for x in range(10)]
+          csp = GSSolver(V, [AllDiff(V)])
+          csp.stop\PYZus{}on\PYZus{}first = True
+          csp.solve()
+          print(head(csp.solution))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[x9=0, x8=1, x7=2, x6=3, x5=4, x4=5, x3=6, x2=7, x1=8, x0=9]
+Wall time: 20 ms
+
+    \end{Verbatim}
+
+    If we create a very large problem with \(k=100\), and
+\(D_k=\{0,\ldots,99\}\), the complexity of this problem is
+\(O(ck^d) = O(100^{100})\). The \(\mathrm{AllDiff}\) constraint really
+shines here. To create inequalities for all \(100\) variables, we would
+get \(100^2=10,000\) different constraints. The complexity would have
+been \(O(10,000\cdot100^{100})\), which is just \(O(100^{102})\), quite
+an improvement. Also considering that it doesn't have to iterate over
+\(10,000\) constraints, and check them one by one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V = [Variable(\PYZsq{}x\PYZob{}\PYZcb{}\PYZsq{}.format(x), list(range(100))) for x in range(100)]
+          csp = GSSolver(V, [AllDiff(V)])
+          csp.stop\PYZus{}on\PYZus{}first = True
+          csp.solve()
+          print(head(csp.solution))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[x99=0, x98=1, x97=2, x96=3, x95=4, x94=5, x93=6, x92=7, x91=8, x90=9, x89=10, x88=11, x87=12, x86=13, x85=14, x84=15, x83=16, x82=17, x81=18, x80=19, x79=20, x78=21, x77=22, x76=23, x75=24, x74=25, x73=26, x72=27, x71=28, x70=29, x69=30, x68=31, x67=32, x66=33, x65=34, x64=35, x63=36, x62=37, x61=38, x60=39, x59=40, x58=41, x57=42, x56=43, x55=44, x54=45, x53=46, x52=47, x51=48, x50=49, x49=50, x48=51, x47=52, x46=53, x45=54, x44=55, x43=56, x42=57, x41=58, x40=59, x39=60, x38=61, x37=62, x36=63, x35=64, x34=65, x33=66, x32=67, x31=68, x30=69, x29=70, x28=71, x27=72, x26=73, x25=74, x24=75, x23=76, x22=77, x21=78, x20=79, x19=80, x18=81, x17=82, x16=83, x15=84, x14=85, x13=86, x12=87, x11=88, x10=89, x9=90, x8=91, x7=92, x6=93, x5=94, x4=95, x3=96, x2=97, x1=98, x0=99]
+Wall time: 45.6 s
+
+    \end{Verbatim}
+
+    It still finds a solution within a minute.
+
+    \hypertarget{search-heuristic-hgssolver}{%
+\section{\texorpdfstring{Search heuristic
+(\texttt{HGSSolver})}{Search heuristic (HGSSolver)}}\label{search-heuristic-hgssolver}}
+
+    Let's start with applying the GS algorithm to the map coloring problem:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V, C = color\PYZus{}problem()
+          csp = GSSolver(V,C)
+          csp.solve()
+          print(\PYZsq{}There are \PYZob{}\PYZcb{} solutions:\PYZsq{}.format(len(csp.solution)))
+          lkup = \PYZob{}v:k for k,v in colors.items()\PYZcb{}
+          print([[\PYZob{}v.name:lkup[v.value]\PYZcb{} for v in s] for s in csp.solution])
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 6 solutions:
+[[\{'V': 'red'\}, \{'NSW': 'blue'\}, \{'Q': 'red'\}, \{'NT': 'blue'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'red'\}, \{'NSW': 'green'\}, \{'Q': 'red'\}, \{'NT': 'green'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'red'\}, \{'Q': 'blue'\}, \{'NT': 'red'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'green'\}, \{'Q': 'blue'\}, \{'NT': 'green'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'red'\}, \{'Q': 'green'\}, \{'NT': 'red'\}, \{'WA': 'green'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'blue'\}, \{'Q': 'green'\}, \{'NT': 'blue'\}, \{'WA': 'green'\}, \{'SA': 'green'\}]]
+Wall time: 53 ms
+
+    \end{Verbatim}
+
+    It is faster than the GT algorithm, but it can be improved further. If
+it starts with the assignment of variables that are ordered by in how
+many constraints they are used, it will fail early. For the
+\(\textrm{AllDiff}\) where all the variables share an equal amount of
+constraints, this will have no effect. However, for the map coloring
+problem this should give a speed improvement.
+
+\textbf{Pre-sort algorithm:}
+
+\begin{itemize}
+\tightlist
+\item
+  For each \(V \in \mathscr{V}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Count in how many constraints \(V\) is used.
+  \end{itemize}
+\item
+  Sort all the variables based on the count (large to small).
+\item
+  Call the \texttt{hgs\_solve(...)} function with the sorted variables
+  in \(\mathscr{V}\).
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V, C = color\PYZus{}problem()
+          csp = GSSolver(V,C)
+          csp.solve()
+          print(\PYZsq{}There are \PYZob{}\PYZcb{} solutions:\PYZsq{}.format(len(csp.solution)))
+          lkup = \PYZob{}v:k for k,v in colors.items()\PYZcb{}
+          print([[\PYZob{}v.name:lkup[v.value]\PYZcb{} for v in s] for s in csp.solution])
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 6 solutions:
+[[\{'V': 'red'\}, \{'NSW': 'blue'\}, \{'Q': 'red'\}, \{'NT': 'blue'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'red'\}, \{'NSW': 'green'\}, \{'Q': 'red'\}, \{'NT': 'green'\}, \{'WA': 'red'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'red'\}, \{'Q': 'blue'\}, \{'NT': 'red'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'blue'\}, \{'NSW': 'green'\}, \{'Q': 'blue'\}, \{'NT': 'green'\}, \{'WA': 'blue'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'red'\}, \{'Q': 'green'\}, \{'NT': 'red'\}, \{'WA': 'green'\}, \{'SA': 'green'\}], [\{'V': 'green'\}, \{'NSW': 'blue'\}, \{'Q': 'green'\}, \{'NT': 'blue'\}, \{'WA': 'green'\}, \{'SA': 'green'\}]]
+Wall time: 55 ms
+
+    \end{Verbatim}
+
+    The next example contains the implementation of the pre-sort algorithm.
+This is implemented in the \texttt{HGSSolver} where the H stands for
+heuristic.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}286}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          V, C = color\PYZus{}problem()
+          csp = HGSSolver(V,C)
+          csp.solve()
+          print(\PYZsq{}There are \PYZob{}\PYZcb{} solutions:\PYZsq{}.format(len(csp.solution)))
+          lkup = \PYZob{}v:k for k,v in colors.items()\PYZcb{}
+          print([[\PYZob{}v.name:lkup[v.value]\PYZcb{} for v in s] for s in csp.solution])
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 6 solutions:
+[[\{'SA': 'red'\}, \{'NSW': 'blue'\}, \{'Q': 'green'\}, \{'NT': 'blue'\}, \{'V': 'green'\}, \{'WA': 'green'\}], [\{'SA': 'red'\}, \{'NSW': 'green'\}, \{'Q': 'blue'\}, \{'NT': 'green'\}, \{'V': 'blue'\}, \{'WA': 'green'\}], [\{'SA': 'blue'\}, \{'NSW': 'red'\}, \{'Q': 'green'\}, \{'NT': 'red'\}, \{'V': 'green'\}, \{'WA': 'green'\}], [\{'SA': 'blue'\}, \{'NSW': 'green'\}, \{'Q': 'red'\}, \{'NT': 'green'\}, \{'V': 'red'\}, \{'WA': 'green'\}], [\{'SA': 'green'\}, \{'NSW': 'red'\}, \{'Q': 'blue'\}, \{'NT': 'red'\}, \{'V': 'blue'\}, \{'WA': 'green'\}], [\{'SA': 'green'\}, \{'NSW': 'blue'\}, \{'Q': 'red'\}, \{'NT': 'blue'\}, \{'V': 'red'\}, \{'WA': 'green'\}]]
+Wall time: 15 ms
+
+    \end{Verbatim}
+
+    Yet again, a nice boost in performance. However, this is not useful when
+there is a problem where each variable has the same set of constraints,
+i.e.~a \(\textrm{AllDiff}\) constraint which contains all the variables.
+Because there is an equal amount of constraints, the variables cannot be
+sorted on the number of constraints in which they are scoped.
+
+    \hypertarget{inference-igssolver}{%
+\section{\texorpdfstring{Inference
+(\texttt{IGSSolver})}{Inference (IGSSolver)}}\label{inference-igssolver}}
+
+    \hypertarget{cycling}{%
+\subsection{Cycling}\label{cycling}}
+
+    Now how can we speed up the \(O(100^{100})\) complexity problem? We know
+that each variable should be different. Therefore can infer that we
+shouldn't use the value of the previous variable. Instead, it should
+cycle through the domain, whilst assigning variables. If it starts at
+\(0\) and cycles through to \(99\), the first generated world is also a
+solution, massive speed up!
+
+But variables can contain different domains, so we can only cycle
+through the domain of the variable, if the previously assigned variable
+has the same domain.
+
+Therefore we can state that if the previous assigned variable domain is
+equal to the current one, we can increment the value with modulo
+\(\max \{\textrm{dom}(V_k)\}\). To do this, the loop where we iterate
+over all the domains, should shift it values (wrapping around) such that
+the increment is the first element in the list.
+
+A more sophisticated and generic approach is described in the next
+section.
+
+    \hypertarget{domain-pruning}{%
+\subsection{Domain pruning}\label{domain-pruning}}
+
+    If any \(\mathrm{AllDiff}\) constraints are used, we can infer some
+information about the domains of other variables that are in the same
+\(\mathrm{AllDiff}\). Let the variables be
+\(\mathscr{V}=\{V_1,V_2,V_3,V_4,V_5\}\) with domain
+\(\textrm{dom}(V_k) = \{1,\ldots,k\}\) where \(k=5\). Under the
+constraint that \(\textrm{AllDiff}(V_2,V_3,V_4)\). Assume \(V_2=1\). By
+inference, we know that \(V_3\) and \(V_4\) cannot equal \(V_2=1\).
+Therefore, when assigning \(V_2\), the algorithm should check in which
+\(\textrm{AllDiff}\)s the variable is used, and remove the assigned
+value from the domain of the other variables that are in the
+\(\textrm{AllDiff}\).
+
+\textbf{Domain pruning algorithm:} Let
+\(\mathscr{V}=\{V_1,V_2,\ldots,V_k\}\) with
+\(\textrm{dom}(V_k)=\{0,1,2,\ldots,k-1\}\) where all the variables share
+the constraint \(\textrm{AllDiff}(V_1,V_2,\ldots,V_k)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Start with \(k=0\).
+\item
+  Take the first value \(v\) from \(\textrm{dom}(V_k)\).
+\item
+  If \(\textrm{dom}(V_k) = \emptyset\) then set \(V_k=v\) and goto 6.
+\item
+  Set the variable \(V_k=v\).
+\item
+  Remove \(v\) from the domain of all variables \(V\) that come after
+  \(V_k\).
+\item
+  Increment \(k\) by one.
+\item
+  For any other variables, goto 2.
+\end{enumerate}
+
+This will result in the following domains for the first world:
+
+\[ \begin{align} \textrm{dom}(V_1) &= \{0,1,2,\ldots,k-1\} \\ \textrm{dom}(V_2) &= \{1,2,\ldots,k-1\} \\ \textrm{dom}(V_3) &= \{2,\ldots,k-1\} \\ &\vdots \\ \textrm{dom}(V_k) &= \{k-1\} \end{align}\]
+
+It might be obvious, but the important part is that this algorithm will
+always pick a different value than the previous assigned value. The
+algorithm assumes that all the variables in the \(\textrm{AllDiff}\)
+have an equal domain. The first solution is also a model of the
+\(O(100^{100})\) problem, which means that it achieves the same
+behaviour as described in previous section (Cycling).
+
+    \hypertarget{applications}{%
+\section{Applications}\label{applications}}
+
+    \hypertarget{sudoku-solver}{%
+\subsection{Sudoku solver}\label{sudoku-solver}}
+
+    In a Sudoku puzzle there are \(9^{53}\) possible worlds, which is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{l+m+mi}{9}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{53}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}184}]:} 375710212613636260325580163599137907799836383538729
+\end{Verbatim}
+            
+    It is possible to create model for the Sudoku problem with
+\(27\ \textrm{AllDiff}\) constraints: * \(9\) for each row * \(9\) for
+each column * \(9\) for each square
+
+    \hypertarget{n-queens-problem}{%
+\subsection{N-Queens problem}\label{n-queens-problem}}
+
+    A smart way to formulate this problem is with \(V_k\) variables, where
+each variable is on row \(k\).
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

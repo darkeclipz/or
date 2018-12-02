@@ -37,7 +37,7 @@ AE*-BD*|3+2+3=8|
 
 We can see that if we add AB-DE, the total weight of the path will increase by 7.
 
-![Eulerian graph](graph_Eulerian.png)
+![Eulerian graph](graph_euler.png)
 
 The total weight of the path is the sum of all the edges, because this is an Eulerian circuit. This means that the total weight + additional weight is 32 + 7 = 39.
 

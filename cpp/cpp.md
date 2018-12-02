@@ -43,7 +43,7 @@ The total weight of the path is the sum of all the edges, because this is an Eul
 
 ![path](graph_path.png)
 
-The path is an Euler circuit, such as: ABACBECDEDEA.
+The path is an Euler circuit, such as: ABCACBECDEDEA.
 
 ## Notes
 

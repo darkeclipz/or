@@ -1,0 +1,33 @@
+<style>body {margin:0;padding:0;}</style>
+<canvas id="canvas"></canvas>
+<script src="draw.js"></script>
+<script src="graph.js"></script>
+<script src="vec2.js"></script>
+<script>
+    
+    let d = new Draw('canvas');
+    d.clear();
+
+    let n = 25;
+    let P = new Array(n);
+    for(let i=0; i < n; i++) {
+        P[i] = Vec2.rand(window.innerWidth, window.innerHeight);
+    }
+
+    let g = new EdgeWeightedGraph(n);
+
+    for(let i=0; i < P.length; i++){
+        let p = P[i];
+        for(let j=0; j < P.length; j++) {
+            if(i == j || Math.random() >= .25) continue;
+            let q = P[j];
+            d.line(p,q);
+            g.addEdge(new Edge(i,j,p.distance(q)));
+            d.text(p.center(q), Math.round(p.distance(q)));
+        }
+    }
+
+    for(let p of P) 
+        d.point(p);
+
+</script>

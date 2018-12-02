@@ -4,20 +4,20 @@
 
 **Definition (connected):** A graph G is called _connected_, if there is a path between every pair of vertices in G.
 
-**Definition (Euler graph/circuit):** A graph G is called an _Euler_ graph, if there is a circuit in G which contains every edge in G. Such a circuit is called an _Euler circuit_.
+**Definition (Eulerian graph/circuit):** A graph G is called an _Eulerian_ graph, if there is a circuit in G which contains every edge in G. Such a circuit is called an _Eulerian circuit_.
 
 **Theorem (necessary and sufficient condition):** If G is connected, the following holds: 
- * G is an Euler graph <=> All vertices in G have an even degree.
+ * G is an Eulerian graph <=> All vertices in G have an even degree.
 
 # Chinese postman problem (CPP)
 
-The Chinese postman problem is to find the lightest tour along all edges in a connected graph. Formulating the question in Graph Theory, we get:
+The [Chinese postman problem](https://en.wikipedia.org/wiki/Route_inspection_problem) is to find the lightest tour along all edges in a connected graph. Formulating the question in Graph Theory, we get:
 
-> Find an Euler circuit in G.
+> Find an Eulerian circuit in G.
 
-To find an Euler circuit, G must be an Euler graph. This means the following two cases can happen: 
- 1. If G is already an Euler graph, we find any Euler circuit.
- 2. If G is not an Euler graph, we will have to add the lightest edges to G, until all vertices of G have an even degree.
+To find an Eulerian circuit, G must be an Eulerian graph. This means the following two cases can happen: 
+ 1. If G is already an Eulerian graph, we find any Eulerian circuit.
+ 2. If G is not an Eulerian graph, we will have to add the lightest edges to G, until G contains an Eulerian circuit.
 
 ## Example
 
@@ -25,7 +25,7 @@ Let G be the following graph:
 
 ![graph](graph.png)
 
-We can see that the vertices with an odd degree are: ABDE. Because not all vertices have an even degree, this is not an Euler graph. To change G into an Euler graph, we have to add atleast two edges.
+We can see that the vertices with an odd degree are: ABDE. Because not all vertices have an even degree, this is not an Eulerian graph. To change G into an Eulerian graph, we have to add atleast two edges.
 
 First we will make a list with all possible pairs we can make from ABDE. We will denote the pair with a * if it is not a direct path.
 
@@ -37,13 +37,13 @@ AE*-BD*|3+2+3=8|
 
 We can see that if we add AB-DE, the total weight of the path will increase by 7.
 
-![euler graph](graph_euler.png)
+![Eulerian graph](graph_Eulerian.png)
 
-The total weight of the path is the sum of all the edges, because this is an Euler circuit. This means that the total weight + additional weight is 32 + 7 = 39.
+The total weight of the path is the sum of all the edges, because this is an Eulerian circuit. This means that the total weight + additional weight is 32 + 7 = 39.
 
 ![path](graph_path.png)
 
-The path is an Euler circuit, such as: ABCACBECDEDEA.
+The path is an Eulerian circuit, such as: ABCACBECDEDEA.
 
 ## Notes
 

@@ -454,11 +454,11 @@ following four quantities:
   \(\dfrac{\partial^2 f(x,y)}{\partial y^2}\) : The second partial
   derivative of \(f(x,y)\) with respect to \(y\).
 \item
-  \(\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2}\) : The first
+  \(\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\) : The first
   partial with respect to \(x\), and the second partial with respect to
   \(y\).
 \item
-  \(\dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2}\) : The first
+  \(\dfrac{\partial^2 f(x,y)}{\partial y \partial x}\) : The first
   partial with respect to \(y\), and the second partial with respect to
   \(x\).
 \end{itemize}
@@ -466,69 +466,61 @@ following four quantities:
     It is important to note that if we first take the partial with respect
 to \(x\) and then with respect to \(y\), we will get the same as if we
 first take it with respect to \(y\) and the with respect to \(x\). This
-means that \(\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2}\) is
-the same as \(\dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2}\).
-Therefore it is sufficient to find one of them, and squaring them to get
-\(\left[\dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2}\right]^2\).
+means that \(\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\) is the
+same as \(\dfrac{\partial^2 f(x,y)}{\partial y \partial x}\). Therefore
+it is sufficient to find one of them, and squaring them to get
+\(\left[\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\right]^2\).
 
 After we have found the quantities, we can compare them in the following
 table to see if \(f(x,y)\) is convex/concave, or none at all:
 
-    \begin{longtable}[]{@{}llllll@{}}
+    \begin{longtable}[]{@{}lllll@{}}
 \toprule
-\begin{minipage}[b]{0.14\columnwidth}\raggedright
+\begin{minipage}[b]{0.17\columnwidth}\raggedright
 Quantity\strut
-\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright
 Convex\strut
-\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright
 Strictly convex\strut
-\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright
 Concave\strut
-\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright
 Strictly concave\strut
-\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
-\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.14\columnwidth}\raggedright
-\(\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[ \dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2} \right]^2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\(\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[ \dfrac{\partial^2 f(x,y)}{\partial x \partial y} \right]^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\geq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(>0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\geq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(> 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
-\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.14\columnwidth}\raggedright
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\dfrac{\partial^2 f(x,y)}{\partial x^2}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\geq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(>0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\leq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(< 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
-\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.14\columnwidth}\raggedright
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\dfrac{\partial^2 f(x,y)}{\partial y^2}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\geq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(>0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(\leq 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright
 \(< 0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
-\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
@@ -536,26 +528,26 @@ Strictly concave\strut
     A quick way to determine if a function is convex or concave, is by
 finding the quantities in the following matrix:
 
-\[ M = \begin{bmatrix} \dfrac{\partial^2 f(x,y)}{\partial x^2} & \dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2} \\ \dfrac{\partial^2 f(x,y)}{\partial y^2} & \dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2}  \end{bmatrix} \]
+\[ M = \begin{bmatrix} \dfrac{\partial^2 f(x,y)}{\partial x^2} & \dfrac{\partial^2 f(x,y)}{\partial x \partial y} \\ \dfrac{\partial^2 f(x,y)}{\partial y^2} & \dfrac{\partial^2 f(x,y)}{\partial y \partial x}  \end{bmatrix} \]
 
     If \(f(x,y)\) is convex/concave, this means that
 \(\textrm{det}(M) \geq 0\). If we remember that
 \(\text{det}(M) = \dfrac{1}{ad-bc}\), we can see that the
 \(\textrm{det}(M)\) becomes:
 
-\[ \dfrac{1}{\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2} } \geq 0 \]
+\[ \dfrac{1}{\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \dfrac{\partial^2 f(x,y)}{\partial x \partial y} \cdot \dfrac{\partial^2 f(x,y)}{\partial y \partial x} } \geq 0 \]
 
     But if we recall that
-\(\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2}\) is the same as
-\(\dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2}\), we can rewrite
-it as:
+\(\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\) is the same as
+\(\dfrac{\partial^2 f(x,y)}{\partial y \partial x}\), we can rewrite it
+as:
 
-\[ \dfrac{1}{\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2}\right]^2  } \geq 0.\]
+\[ \dfrac{1}{\dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\right]^2  } \geq 0.\]
 
 But because we only want to determine if the result is zero or positive,
 we can conclude that
 
-\[ \dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2}\right]^2 \geq 0,\]
+\[ \dfrac{\partial^2 f(x,y)}{\partial x^2} \cdot \dfrac{\partial^2 f(x,y)}{\partial y^2} - \left[\dfrac{\partial^2 f(x,y)}{\partial x \partial y}\right]^2 \geq 0,\]
 
 which is the quantity in the table.
 
@@ -571,15 +563,15 @@ which is the quantity in the table.
 \item
   \(\dfrac{\partial^2 f(x,y)}{\partial y^2} = 2\).
 \item
-  \(\dfrac{\partial^2 f(x,y)}{\partial x^2 \partial y^2} = 1\).
+  \(\dfrac{\partial^2 f(x,y)}{\partial x \partial y} = 1\).
 \item
-  \(\dfrac{\partial^2 f(x,y)}{\partial y^2 \partial x^2} = 1\).
+  \(\dfrac{\partial^2 f(x,y)}{\partial y \partial x} = 1\).
 \end{itemize}
 
 If we let \(M=\begin{bmatrix} 2 && 1 \\ 1 && 2 \end{bmatrix}\) we find
 that
 \(\textrm{det}(M)=\dfrac{1}{2\cdot2-1\cdot1} = \dfrac{1}{4-1} = \dfrac{1}{3}\).
-This means that the function is either concave or convex.
+This means that the function is either convex or concave.
 
 If we look at the table we can see that
 \(\dfrac{\partial^2 f(x,y)}{\partial x^2} > 0\) and
